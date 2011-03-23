@@ -9,35 +9,35 @@ import com.pfs.base.BasePlugin;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
-
 public class BaseSelectionListener implements SelectionListener {
-  private BasePlugin _plugin;
-  
-  /**
-   * @param plugin The plugin to notify if an error occurs during selection.  
-   * If null, any errors will simply be ignored.
-   */
-  public BaseSelectionListener( BasePlugin plugin ) {
-    _plugin = plugin;
-  }
-  
-  protected void onSelection() throws Exception {
-  }
-  
-  protected void showError( Throwable error ) {
-    if( _plugin != null )
-      _plugin.showError( error );
-  }
-  
-  public void widgetSelected( SelectionEvent e ) {
-    try {
-      onSelection();
-    } catch( Exception ex ) {
-      showError( ex );
-    }
-  }
+	private BasePlugin plugin;
 
-  public void widgetDefaultSelected( SelectionEvent e ) {
-    widgetSelected( e );
-  }
+	/**
+	 * @param plugin The plugin to notify if an error occurs during selection. If null, any errors will simply be
+	 *        ignored.
+	 */
+	public BaseSelectionListener(BasePlugin plugin) {
+		this.plugin = plugin;
+	}
+
+	protected void onSelection() throws Exception {
+	}
+
+	protected void showError(Throwable error) {
+		if (plugin != null) {
+			plugin.showError(error);
+		}
+	}
+
+	public void widgetSelected(SelectionEvent e) {
+		try {
+			onSelection();
+		} catch (Exception ex) {
+			showError(ex);
+		}
+	}
+
+	public void widgetDefaultSelected(SelectionEvent e) {
+		widgetSelected(e);
+	}
 }

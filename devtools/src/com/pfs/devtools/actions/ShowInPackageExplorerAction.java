@@ -12,22 +12,23 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IViewActionDelegate;
 
-
 public class ShowInPackageExplorerAction extends DevToolsAction implements IViewActionDelegate {
 
-  protected void onRun( IAction action ) throws Exception {
-    IEditorPart editor = getActiveEditor();
-    
-    if( editor != null ) {
-      IEditorInput input = editor.getEditorInput();
-      
-      Object resource = input.getAdapter( IJavaElement.class );
-      
-      if( resource == null )
-        resource = input.getAdapter( IFile.class );
-      
-      if( resource != null )
-        PackageExplorerPart.openInActivePerspective().selectAndReveal( resource );
-    }
-  }
+	protected void onRun(IAction action) throws Exception {
+		IEditorPart editor = getActiveEditor();
+
+		if (editor != null) {
+			IEditorInput input = editor.getEditorInput();
+
+			Object resource = input.getAdapter(IJavaElement.class);
+
+			if (resource == null) {
+				resource = input.getAdapter(IFile.class);
+			}
+
+			if (resource != null) {
+				PackageExplorerPart.openInActivePerspective().selectAndReveal(resource);
+			}
+		}
+	}
 }

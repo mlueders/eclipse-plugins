@@ -10,9 +10,9 @@ import org.eclipse.jface.preference.IPreferenceStore;
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
-  public void initializeDefaultPreferences() {
-    IPreferenceStore store = DevToolsPlugin.getDefault().getPreferenceStore();
-    
-    store.setDefault( PreferenceConstants.INITIAL_DEFAULT_VM_ARGS, "" );
-  }
+	public void initializeDefaultPreferences() {
+		IPreferenceStore store = DevToolsPlugin.getDefault().getPreferenceStore();
+
+		store.setDefault(PreferenceConstants.INITIAL_DEFAULT_VM_ARGS, "");
+	}
 }

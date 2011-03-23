@@ -10,59 +10,62 @@ import org.eclipse.debug.core.ILaunchesListener2;
 
 import java.util.ArrayList;
 
-
 public class ActiveLaunchMonitor implements ILaunchesListener2 {
-  private static ILaunch[] EMPTY = new ILaunch[0];
-  private static ActiveLaunchMonitor INSTANCE = null;
-  
-  public static ActiveLaunchMonitor getInstance() {
-    if( INSTANCE == null ) {
-      INSTANCE = new ActiveLaunchMonitor();
-      DebugPlugin.getDefault().getLaunchManager().addLaunchListener( INSTANCE );
-    }
-    
-    return INSTANCE;
-  }
-  
-  private ArrayList<ILaunch> _active;
-  private ArrayList<ILaunch> _launches;
+	private static ILaunch[] EMPTY = new ILaunch[0];
+	private static ActiveLaunchMonitor INSTANCE = null;
 
-  private ActiveLaunchMonitor() {
-    _active = new ArrayList<ILaunch>();
-    _launches = new ArrayList<ILaunch>();
-  }
-  
-  public ILaunch[] getAllLaunches() {
-    return _launches.toArray( EMPTY );
-  }
-  
-  public ILaunch[] getActiveLaunches() {
-    return _active.toArray( EMPTY );
-  }
-  
-  public ILaunch getLastActiveLaunch() {
-    if( _active.isEmpty() )
-      return null;
-    
-    return _active.get( 0 );
-  }
+	public static ActiveLaunchMonitor getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new ActiveLaunchMonitor();
+			DebugPlugin.getDefault().getLaunchManager().addLaunchListener(INSTANCE);
+		}
 
-  public void launchesTerminated( ILaunch[] launches ) {
-    for( int i = 0; i < launches.length; i++ )
-      _active.remove( launches[i] );
-  }
+		return INSTANCE;
+	}
 
-  public void launchesAdded( ILaunch[] launches ) {
-    for( int i = 0; i < launches.length; i++ ) {
-      _launches.add( launches[i] );
-      _active.add( launches[i] );
-    }
-  }
+	private ArrayList<ILaunch> active;
+	private ArrayList<ILaunch> launches;
 
-  public void launchesChanged( ILaunch[] launches ) {}
-  
-  public void launchesRemoved( ILaunch[] launches ) {
-    for( int i = 0; i < launches.length; i++ )
-      _launches.remove( launches[i] );
-  }
+	private ActiveLaunchMonitor() {
+		active = new ArrayList<ILaunch>();
+		launches = new ArrayList<ILaunch>();
+	}
+
+	public ILaunch[] getAllLaunches() {
+		return launches.toArray(EMPTY);
+	}
+
+	public ILaunch[] getActiveLaunches() {
+		return active.toArray(EMPTY);
+	}
+
+	public ILaunch getLastActiveLaunch() {
+		if (active.isEmpty()) {
+			return null;
+		}
+
+		return active.get(0);
+	}
+
+	public void launchesTerminated(ILaunch[] launchesTerminated) {
+		for (int i = 0; i < launchesTerminated.length; i++) {
+			active.remove(launchesTerminated[i]);
+		}
+	}
+
+	public void launchesAdded(ILaunch[] launchesAdded) {
+		for (int i = 0; i < launchesAdded.length; i++) {
+			launches.add(launchesAdded[i]);
+			active.add(launchesAdded[i]);
+		}
+	}
+
+	public void launchesChanged(ILaunch[] launchesChanged) {
+	}
+
+	public void launchesRemoved(ILaunch[] launchesRemoved) {
+		for (int i = 0; i < launchesRemoved.length; i++) {
+			launches.remove(launchesRemoved[i]);
+		}
+	}
 }

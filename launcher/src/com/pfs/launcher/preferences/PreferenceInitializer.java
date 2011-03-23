@@ -10,13 +10,13 @@ import org.eclipse.jface.preference.IPreferenceStore;
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
-  public void initializeDefaultPreferences() {
-    IPreferenceStore store = QuickLaunchPlugin.getDefault().getPreferenceStore();
+	public void initializeDefaultPreferences() {
+		IPreferenceStore store = QuickLaunchPlugin.getDefault().getPreferenceStore();
 
-    store.setDefault( PreferenceConstants.FIRST_LAUNCHER, "" );
-    store.setDefault( PreferenceConstants.SECOND_LAUNCHER, "" );
-    store.setDefault( PreferenceConstants.THIRD_LAUNCHER, "" );
-    store.setDefault( PreferenceConstants.FOURTH_LAUNCHER, "" );
-    store.setDefault( PreferenceConstants.FIFTH_LAUNCHER, "" );
-  }
+		store.setDefault(PreferenceConstants.FIRST_LAUNCHER, "");
+		store.setDefault(PreferenceConstants.SECOND_LAUNCHER, "");
+		store.setDefault(PreferenceConstants.THIRD_LAUNCHER, "");
+		store.setDefault(PreferenceConstants.FOURTH_LAUNCHER, "");
+		store.setDefault(PreferenceConstants.FIFTH_LAUNCHER, "");
+	}
 }

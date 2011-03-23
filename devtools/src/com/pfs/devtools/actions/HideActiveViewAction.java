@@ -9,14 +9,14 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 
-
 public class HideActiveViewAction extends DevToolsAction {
-  
-  protected void onRun( IAction action ) throws Exception {
-    IWorkbenchPage activePage = getWindow().getActivePage();
-    IWorkbenchPart active = activePage.getActivePart();
-    
-    if( active instanceof IViewPart )
-      activePage.hideView( (IViewPart) active );
-  }
+
+	protected void onRun(IAction action) throws Exception {
+		IWorkbenchPage activePage = getWindow().getActivePage();
+		IWorkbenchPart active = activePage.getActivePart();
+
+		if (active instanceof IViewPart) {
+			activePage.hideView((IViewPart) active);
+		}
+	}
 }

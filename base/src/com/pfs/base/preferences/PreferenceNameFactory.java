@@ -4,15 +4,14 @@
  */
 package com.pfs.base.preferences;
 
-
 public class PreferenceNameFactory {
-  private String prefix_;
-  
-  public PreferenceNameFactory( Class type ) {
-    prefix_ = type.getName();
-  }
-  
-  public String createPreferenceName( String preference ) {
-    return prefix_ + "." + preference;
-  }
+	private String prefix;
+
+	public PreferenceNameFactory(Class type) {
+		prefix = type.getName();
+	}
+
+	public String createPreferenceName(String preference) {
+		return prefix + "." + preference;
+	}
 }

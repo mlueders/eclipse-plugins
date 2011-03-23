@@ -4,13 +4,12 @@
  */
 package com.pfs.launcher;
 
-
 public interface ILauncher {
-  String getLauncherName();
-  
-  String getLaunchMode();
-  
-  boolean supportsLaunchMode();
-  
-  void run();
+	String getLauncherName();
+
+	String getLaunchMode();
+
+	boolean supportsLaunchMode();
+
+	void run();
 }

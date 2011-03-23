@@ -1,5 +1,7 @@
 package com.pfs.base;
 
+import static com.pfs.base.PluginSupport.LINE_SEP;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -22,166 +24,169 @@ import java.util.ResourceBundle;
  */
 public abstract class BasePlugin extends AbstractUIPlugin {
 
-  // necessary so we can specify a non-abstract plugin in plugin.xml
-  public static class Impl extends BasePlugin {
+	// necessary so we can specify a non-abstract plugin in plugin.xml
+	public static class Impl extends BasePlugin {
 
-    @Override
-    public String getPluginId() {
-      throw new IllegalStateException();
-    }
+		@Override
+		public String getPluginId() {
+			throw new IllegalStateException();
+		}
 
-    @Override
-    public void onStop() {}
-  }
+		@Override
+		public void onStop() {
+		}
+	}
+	
+	public abstract String getPluginId();
 
-  public abstract String getPluginId();
-  public abstract void onStop();
+	public abstract void onStop();
 
-  // Resource bundle.
-  private ResourceBundle resourceBundle;
+	// Resource bundle.
+	private ResourceBundle resourceBundle;
 
-  /**
-   * The constructor.
-   */
-  public BasePlugin() {
-    super();
-  }
-/*
-  public BasePlugin( IPluginDescriptor descriptor ) {
-    super( descriptor );
-  }
-*/
-  /**
-   * This method is called upon plug-in activation
-   */
-  public void start( BundleContext context ) throws Exception {
-    super.start( context );
-  }
+	/**
+	 * The constructor.
+	 */
+	public BasePlugin() {
+		super();
+	}
 
-  /**
-   * This method is called when the plug-in is stopped
-   */
-  public void stop( BundleContext context ) throws Exception {
-    super.stop( context );
-    resourceBundle = null;
-    onStop();
-  }
+//	public BasePlugin(IPluginDescriptor descriptor) {
+//		super(descriptor);
+//	}
 
-  /**
-   * Returns the string from the plugin's resource bundle, or 'key' if not
-   * found.
-   */
-  public String getResourceString( String key ) {
-    ResourceBundle bundle = getResourceBundle();
-    try {
-      return (bundle != null) ? bundle.getString( key ) : key;
-    }
-    catch( MissingResourceException e ) {
-      return key;
-    }
-  }
+	/**
+	 * This method is called upon plug-in activation
+	 */
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+	}
 
-  protected String getResourceBundleName() {
-    return getPluginId() + ".resources";
-  }
+	/**
+	 * This method is called when the plug-in is stopped
+	 */
+	public void stop(BundleContext context) throws Exception {
+		super.stop(context);
+		resourceBundle = null;
+		onStop();
+	}
 
-  /**
-   * Returns the plugin's resource bundle,
-   */
-  public ResourceBundle getResourceBundle() {
-    try {
-      if( resourceBundle == null )
-        resourceBundle = ResourceBundle.getBundle( getResourceBundleName() );
-    }
-    catch( MissingResourceException x ) {
-      resourceBundle = null;
-    }
-    return resourceBundle;
-  }
+	/**
+	 * Returns the string from the plugin's resource bundle, or 'key' if not found.
+	 */
+	public String getResourceString(String key) {
+		ResourceBundle bundle = getResourceBundle();
+		try {
+			return (bundle != null) ? bundle.getString(key) : key;
+		} catch (MissingResourceException e) {
+			return key;
+		}
+	}
 
-  public String getStringPreference( String name ) {
-    return getPreferenceStore().getString( name );
-  }
+	protected String getResourceBundleName() {
+		return getPluginId() + ".resources";
+	}
 
-  private Shell getShell() {
-    IWorkbenchWindow window = getWorkbench().getActiveWorkbenchWindow();
+	/**
+	 * Returns the plugin's resource bundle,
+	 */
+	public ResourceBundle getResourceBundle() {
+		try {
+			if (resourceBundle == null) {
+				resourceBundle = ResourceBundle.getBundle(getResourceBundleName());
+			}
+		} catch (MissingResourceException x) {
+			resourceBundle = null;
+		}
+		return resourceBundle;
+	}
 
-    return window == null ? null : window.getShell();
-  }
+	public String getStringPreference(String name) {
+		return getPreferenceStore().getString(name);
+	}
 
-  public void showError( Throwable error ) {
-    Shell shell = getShell();
+	private Shell getShell() {
+		IWorkbenchWindow window = getWorkbench().getActiveWorkbenchWindow();
 
-    if( shell != null )
-      showError( shell, error );
-    else
-      logError( error );
-  }
+		return window == null ? null : window.getShell();
+	}
 
-  public void showError( Shell shell, Throwable error ) {
-    String title = getName() + " Error";
-    String message = error.getClass() + System.getProperty( "line.separator" ) + error.getMessage()
-        + System.getProperty( "line.separator" ) + getStackTrace( error );
+	public void showError(Throwable error) {
+		Shell shell = getShell();
 
-    logError( message, error );
-    MessageDialog.openError( shell, title, message );
-  }
+		if (shell != null) {
+			showError(shell, error);
+		} else {
+			logError(error);
+		}
+	}
 
-  private String getStackTrace( Throwable error ) {
-    ByteArrayOutputStream out = new ByteArrayOutputStream();
-    PrintStream pOut = new PrintStream( out );
+	public void showError(Shell shell, Throwable error) {
+		String title = getName() + " Error";
+		String message = error.getClass() 
+			+ LINE_SEP + error.getMessage() 
+			+ LINE_SEP + getStackTrace(error);
 
-    error.printStackTrace( pOut );
-    pOut.close();
-    String trace = new String( out.toByteArray() );
-    return trace;
-  }
+		logError(message, error);
+		MessageDialog.openError(shell, title, message);
+	}
 
-  public void showInfo( String message ) {
-    Shell shell = getShell();
+	private String getStackTrace(Throwable error) {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		PrintStream pOut = new PrintStream(out);
 
-    if( shell != null )
-      showInfo( shell, message );
-    else
-      logInfo( message );
-  }
+		error.printStackTrace(pOut);
+		pOut.close();
+		String trace = new String(out.toByteArray());
+		return trace;
+	}
 
-  public void showInfo( Shell shell, String message ) {
-    String title = getName();
+	public void showInfo(String message) {
+		Shell shell = getShell();
 
-    MessageDialog.openInformation( shell, title, message );
-  }
+		if (shell != null) {
+			showInfo(shell, message);
+		} else {
+			logInfo(message);
+		}
+	}
 
-  private String getName() {
-    return getBundle() != null ? getBundle().getSymbolicName() : "<unknown name>";
-  }
+	public void showInfo(Shell shell, String message) {
+		String title = getName();
 
-  public void logInfo( Object msg ) {
-    Status status = new Status( IStatus.ERROR, getName(), IStatus.ERROR, msg + "\n", null );
-    getLog().log( status );
-  }
+		MessageDialog.openInformation(shell, title, message);
+	}
 
-  public void logError( Throwable ex ) {
-    logError( null, ex );
-  }
+	private String getName() {
+		return getBundle() != null ? getBundle().getSymbolicName() : "<unknown name>";
+	}
 
-  public void logError( String msg, Throwable ex ) {
-    String message = createMessage( msg, ex );
-    Status status = new Status( IStatus.ERROR, getName(), IStatus.ERROR, message, ex );
-    getLog().log( status );
-  }
+	public void logInfo(Object msg) {
+		Status status = new Status(IStatus.ERROR, getName(), IStatus.ERROR, msg + LINE_SEP, null);
+		getLog().log(status);
+	}
 
-  private String createMessage( String message, Throwable ex ) {
-    StringWriter stringWriter = new StringWriter();
-    ex.printStackTrace( new PrintWriter( stringWriter ) );
+	public void logError(Throwable ex) {
+		logError(null, ex);
+	}
 
-    String trace = stringWriter.getBuffer().toString();
-    return message != null ? message + "\n" + trace : trace;
-  }
+	public void logError(String msg, Throwable ex) {
+		String message = createMessage(msg, ex);
+		Status status = new Status(IStatus.ERROR, getName(), IStatus.ERROR, message, ex);
+		getLog().log(status);
+	}
 
-  public ImageDescriptor getImageDescriptor( String key ) {
-    URL url = getBundle().getEntry( key );
+	private String createMessage(String message, Throwable ex) {
+		StringWriter stringWriter = new StringWriter();
+		ex.printStackTrace(new PrintWriter(stringWriter));
 
-    return ImageDescriptor.createFromURL( url );
-  }
+		String trace = stringWriter.getBuffer().toString();
+		return message != null ? message + LINE_SEP + trace : trace;
+	}
+
+	public ImageDescriptor getImageDescriptor(String key) {
+		URL url = getBundle().getEntry(key);
+
+		return ImageDescriptor.createFromURL(url);
+	}
 }

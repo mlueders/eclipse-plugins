@@ -7,19 +7,17 @@ package com.pfs.devtools.actions;
 import org.eclipse.jdt.internal.ui.actions.OpenTypeAction;
 import org.eclipse.jface.action.IAction;
 
-
 /**
- * Not sure why, but the OpenType action doesn't seem to work in a perspective 
- * that's not the standard Java or Debug.
+ * Not sure why, but the OpenType action doesn't seem to work in a perspective that's not the standard Java or Debug.
  */
 public class OpenTypeAnywhereAction extends DevToolsAction {
-  private OpenTypeAction _openTypeAction;
-  
-  public OpenTypeAnywhereAction() {
-    _openTypeAction = new OpenTypeAction();
-  }
+	private OpenTypeAction openTypeAction;
 
-  protected void onRun( IAction action ) {
-    _openTypeAction.run( action );
-  }
+	public OpenTypeAnywhereAction() {
+		openTypeAction = new OpenTypeAction();
+	}
+
+	protected void onRun(IAction action) {
+		openTypeAction.run(action);
+	}
 }
