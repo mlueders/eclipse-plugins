@@ -1,0 +1,68 @@
+org.easyexplore
+* augmentation of Emmanuel Boudrant 'Easy Explorer' plugin.  allows openning of a command prompt at the location
+  of the current editor; also, adds commands for both easy explore and easy command actions (makes them bindable).
+
+com.pfs.base
+* base classes all plugins are built on top of
+
+com.pfs.launcher
+* key bindings are configured under the category 'Quick Launch' in Preferences -> General -> Keys
+* adds actions which will run/debug a launch configuration which is dependant on the current location of the cursor.
+  - w/in a java class w/ a main method or w/in the main method itself, executes the main method
+    uses the standard java launch configuration
+  - w/in a java class, inside a no-arg static method, executes the static method
+    introduces a new launch configuration type, 'Static Method'
+  - w/in a junit class, outside a test method, executes all tests
+    uses the 'home.rd.junitrunner' plugin, installed separately
+  - w/in a junit class, inside a test method, executes the test
+    uses the 'home.rd.junitrunner' plugin, installed separately
+  - w/in an ant build file, but not with an ant task, executes the default ant task
+    uses the standard ant launch configuration
+  - w/in an ant build file, inside a task, executes the task
+    uses the standard ant launch configuration
+* adds a set of quick-launch buttons + key bindings.  there are 5 quick-launch actions; upon activation (via button 
+  or binding), if no configuration has been previously bound, it will create a launch configuration (according to the 
+  above set of criteria) and launch it.  thereafter, activating that action will cause that launch configuration
+  to be executed, regardless of cursor position.  additionally, any launch configuration in the launch history may 
+  be manually bound via the 'Bind' drop-down on each quick-launch button.
+
+com.pfs.devtools
+* a misc. set of actions, most w/ the express purpose of minimizing the number of times i have to reach for the mouse
+* key bindings are configured under the category 'DevTools' in in Preferences -> General -> Keys
+* commands are as follows
+  - Show in Pkg Explorer
+    a replacement for the standards 'Show in Package Explorer' action which, for some reason I can't comprehend, only 
+    works for java files.
+  - Copy Qualified Class Name to Clipboard
+    i've found myself, on many occasions, needing the fully-qualified name of a class (write-ups, javadoc, etc), 
+    and i'm really lazy, so...
+  - Minimize Console View
+    minimizes or restores (depending on the current state) the tab group containing the 'Console' view
+  - Maximize Console View
+    replace 'minimize' w/ 'maximize' in the text above
+  - Hide Active View
+    hides the current view.  created specifically for the junit view which pops up every time a junit test is run, but 
+    works for any active view.  very handy when used in conjuction w/ the 'Views' key bindings which allow you to bind the 
+    activation of pretty much any view w/ a key combination.
+  - Terminate All and Clear
+    terminates all active launches and clears the debug view
+  - Terminate Last Launched
+    terminates last launched target
+  - Open Type Anywhere
+    oddly enough, the 'Open Type' action doesn't seem to work in any perspective exception 'Java' and 'Debug'.  not only 
+    is this completely stupid, but also problematic as i've got a custom java perspective i use.
+  - Center Editor
+    duplicates the emacs 'Ctrl + L' functionality, vertically centering the active editor on the cursor
+  - Activate Notes Editor
+    opens (creating if necessary) a 'Notes.txt' file in the root of the active editor's project.
+  - Activate Next Editor/Activate Previous Editor
+    Ctrl+Page Up/Ctrl+Page Down will navigate to the next/previous editors, but only until you reach the last/first 
+    editor in the tab group, at which point it pops up this fucking box, from which you can select an editor to activate.  
+    these actions provide the same functionality, except when the last/first tab is reached, it goes to the next/previous 
+    editor; if the tab belongs to the first/last editor, it jumps to the last/first editor.  basically, this duplicates 
+    the behavior pre-3.1.  
+    NOTE: for correct reordering, use the Extended VS Presentation Plugin (http://andrei.gmxhome.de/eclipse/)
+
+com.pfs.lueders 
+* my personal key bindings & development perspective - ensuring i can pair with anyone who uses these plugins.  also,
+  serves as an example of how to define a bindings scheme as a plugin (very handy in general).

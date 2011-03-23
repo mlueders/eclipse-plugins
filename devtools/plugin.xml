@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="com.pfs.devtools"
+   name="Devtools Plug-in"
+   version="1.0.0"
+   provider-name="lueders"
+   class="com.pfs.devtools.DevToolsPlugin">
+
+   <runtime>
+      <library name="com.pfs.devtools.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="org.eclipse.jdt.launching"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.jdt.debug.ui"/>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="com.pfs.base" export="false"/>
+   </requires>
+   <extension
+         point="org.eclipse.ui.startup">
+   </extension>
+     <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Dev Tools"
+            visible="true"
+            id="com.pfs.devtools.actionSet">
+         <action
+               label="Show in Package Explorer"
+               class="com.pfs.devtools.actions.ShowInPackageExplorerAction"
+               definitionId="com.pfs.devtools.ShowInPackageExplorerCommand"
+               style="push"
+               id="com.pfs.devtools.ShowInPackageExplorerAction"/>
+         <action
+               label="Copy Qualified Class Name to Clipboard"
+               class="com.pfs.devtools.actions.CopyQualifiedClassNameToClipboardAction"
+               definitionId="com.pfs.devtools.CopyQualifiedClassNameToClipboardCommand"
+               style="push"
+               id="com.pfs.devtools.CopyQualifiedClassNameToClipboardAction"/>
+         <action
+               label="Minimize Console View"
+               definitionId="com.pfs.devtools.MinimizeConsoleCommand"
+               class="com.pfs.devtools.actions.ToggleConsoleAction$Minimize"
+               style="push"
+               id="com.pfs.devtools.MinimizeConsoleAction"/>
+         <action
+               label="Maximize Console View"
+               definitionId="com.pfs.devtools.MaximizeConsoleCommand"
+               class="com.pfs.devtools.actions.ToggleConsoleAction$Maximize"
+               style="push"
+               id="com.pfs.devtools.MaximizeConsoleAction"/>
+         <action
+               label="Hide Active Views"
+               definitionId="com.pfs.devtools.HideActiveViewCommand"
+               class="com.pfs.devtools.actions.HideActiveViewAction"
+               style="push"
+               id="com.pfs.devtools.HideActiveViewAction"/>
+         <action
+               label="Terminate All and Clear"
+               class="com.pfs.devtools.actions.TerminateAllAndClearAction"
+               definitionId="com.pfs.devtools.TerminateAllAndClearCommand"
+               style="push"
+               id="com.pfs.devtools.TerminateAllAndClearAction"/>
+         <action
+               label="Terminate Last Launched"
+               class="com.pfs.devtools.actions.TerminateLastLaunchedAction"
+               definitionId="com.pfs.devtools.TerminateLastLaunchedCommand"
+               style="push"
+               id="com.pfs.devtools.TerminateLastLaunchedAction"/>
+         <action
+               label="Open Type Anywhere"
+               class="com.pfs.devtools.actions.OpenTypeAnywhereAction"
+               definitionId="com.pfs.devtools.OpenTypeAnywhereCommand"
+               style="push"
+               id="com.pfs.devtools.OpenTypeAnywhereAction"/>
+         <action
+               label="Center Editor"
+               class="com.pfs.devtools.actions.CenterEditorAction"
+               definitionId="com.pfs.devtools.CenterEditorCommand"
+               style="push"
+               id="com.pfs.devtools.CenterEditorAction"/>
+         <action
+               label="Activate Next Editor"
+               class="com.pfs.devtools.actions.ActivateEditorAction$Next"
+               definitionId="com.pfs.devtools.ActivateNextEditorCommand"
+               style="push"
+               id="com.pfs.devtools.ActivateNextEditorAction"/>
+         <action
+               label="Activate Previous Editor"
+               class="com.pfs.devtools.actions.ActivateEditorAction$Previous"
+               definitionId="com.pfs.devtools.ActivatePreviousEditorCommand"
+               style="push"
+               id="com.pfs.devtools.ActivatePreviousEditorAction"/>
+         <action
+               label="Activate MyPerspective"
+               class="com.pfs.devtools.actions.ActivatePerspectiveAction$MyPerspective"
+               definitionId="com.pfs.devtools.ActivateMyPerspectiveCommand"
+               style="push"
+               id="com.pfs.devtools.ActivateMyPerspectiveAction"/>
+         <action
+               label="Activate EditorList"
+               class="com.pfs.devtools.actions.ActivateViewAction$EditorList"
+               definitionId="com.pfs.devtools.ActivateEditorListCommand"
+               style="push"
+               id="com.pfs.devtools.ActivateEditorListAction"/>
+         <action
+               class="com.pfs.devtools.actions.ToggleBreakpointAction"
+               definitionId="com.pfs.devtools.ToggleBreakPointCommand"
+               label="Toggle Breakpoint"
+               style="push"
+               id="com.pfs.devtools.ToggleBreakPointAction"/>
+         <action
+               class="com.pfs.devtools.actions.ActivateNotesEditorAction"
+               definitionId="com.pfs.devtools.ActivateNotesEditorCommand"
+               label="Activates Notes Editor"
+               style="push"
+               id="com.pfs.devtools.ActivateNotesEditorAction"/>
+         <action
+               label="Next Marked Occurrence"
+               class="com.pfs.devtools.actions.NavigateMarkOccurrence$NextMarkOccurrence"
+               definitionId="com.pfs.devtools.NavigateNextMarkOccurrenceCommand"
+               style="push"
+               id="com.pfs.devtools.NavigateNextMarkOccurrenceAction"/>
+         <action
+               label="Previous Marked Occurrence"
+               class="com.pfs.devtools.actions.NavigateMarkOccurrence$PreviousMarkOccurrence"
+               definitionId="com.pfs.devtools.NavigatePreviousMarkOccurrenceCommand"
+               style="push"
+               id="com.pfs.devtools.NavigatePreviousMarkOccurrenceAction"/>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="com.pfs.DevToolsCategory"
+            name="Dev Tools"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Show in Pkg Explorer"
+            id="com.pfs.devtools.ShowInPackageExplorerCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Copy Qualified Class Name to Clipboard"
+            id="com.pfs.devtools.CopyQualifiedClassNameToClipboardCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Minimize Console View"
+            id="com.pfs.devtools.MinimizeConsoleCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Maximize Console View"
+            id="com.pfs.devtools.MaximizeConsoleCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Hide Active View"
+            id="com.pfs.devtools.HideActiveViewCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Terminate All and Clear"
+            id="com.pfs.devtools.TerminateAllAndClearCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Terminate Last Launched"
+            id="com.pfs.devtools.TerminateLastLaunchedCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Open Type Anywhere"
+            id="com.pfs.devtools.OpenTypeAnywhereCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Center Editor"
+            id="com.pfs.devtools.CenterEditorCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Activate Next Editor"
+            id="com.pfs.devtools.ActivateNextEditorCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Activate Previous Editor"
+            id="com.pfs.devtools.ActivatePreviousEditorCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Activate MyPerspective"
+            id="com.pfs.devtools.ActivateMyPerspectiveCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Activate EditorList"
+            id="com.pfs.devtools.ActivateEditorListCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Toggle Breakpoint"
+            id="com.pfs.devtools.ToggleBreakPointCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Activate Notes Editor"
+            id="com.pfs.devtools.ActivateNotesEditorCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Next Marked Occurrence"
+            id="com.pfs.devtools.NavigateNextMarkOccurrenceCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Previous Marked Occurrence"
+            id="com.pfs.devtools.NavigatePreviousMarkOccurrenceCommand"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.viewActions">
+      <viewContribution
+            targetID="org.eclipse.jdt.ui.PackageExplorer"
+            id="com.pfs.devtools.DevToolsViewContribution">
+         <action
+               toolbarPath="additions"
+               label="Show Active Editor"
+               tooltip="Navigate to Active Editor"
+               icon="icons/showInPackageExplorer.gif"
+               class="com.pfs.devtools.actions.ShowInPackageExplorerAction"
+               style="push"
+               id="com.pfs.devtools.ShowInPackageExplorerViewAction"/>
+      </viewContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="com.pfs.devtools.preferences.PreferenceInitializer"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.pfs.devtools.preferences.DevToolsPreferencePage"
+            name="DevTools"
+            id="com.pfs.devtools.preferences.devToolsPreferencePage"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            class="com.pfs.devtools.properties.DevToolsPropertyPage"
+            name="Dev Tools"
+            id="com.pfs.devtools.properties.devToolsPropertyPage"/>
+   </extension>
+   
+</plugin>

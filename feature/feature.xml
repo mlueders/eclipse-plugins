@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.pfs"
+      label="com.pfs"
+      version="1.0.0"
+      provider-name="lueders">
+
+   <description>
+      Eclipse customizations.
+   </description>
+
+   <license url="http://www.opensource.org/licenses/mit-license.php">
+      All files (com.pfs.*), unless otherwise noted in the file iteself,  
+are release under the MIT license.
+
+Copyright (C) 2003 Mike Lueders
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation files
+(the &quot;Software&quot;), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+The Software is provided &quot;AS IS&quot;, without warranty of any kind,
+express or implied, including but not limited to the warranties of
+merchantability,  fitness for a particular purpose and
+noninfringement. In no event shall the  authors or copyright holders
+be liable for any claim, damages or other liability, whether in an
+action of contract, tort or otherwise, arising from, out of or in
+connection with the Software or the use or other dealings in the
+Software.
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="org.eclipse.jdt.launching"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.jdt.debug.ui"/>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ant.ui"/>
+      <import plugin="org.eclipse.ant.core"/>
+      <import plugin="org.eclipse.ui.externaltools"/>
+      <import plugin="org.eclipse.jdt.junit"/>
+      <import plugin="org.eclipse.search"/>
+      <import plugin="org.eclipse.ui.intro"/>
+      <import plugin="org.eclipse.jdt.debug"/>
+      <import plugin="org.eclipse.ui.ide"/>
+   </requires>
+
+   <plugin
+         id="org.easyexplore"
+         download-size="0"
+         install-size="0"
+         version="1.0.1"/>
+
+   <plugin
+         id="com.pfs.base"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"/>
+
+   <plugin
+         id="com.pfs.devtools"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"/>
+
+   <plugin
+         id="com.pfs.launcher"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"/>
+
+   <plugin
+         id="com.pfs.lueders"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"/>
+
+</feature>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="com.pfs.launcher"
+   name="Quick Launch Plug-in"
+   version="1.0.0"
+   provider-name="lueders"
+   class="com.pfs.launcher.QuickLaunchPlugin">
+
+   <runtime>
+      <library name="com.pfs.launcher.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="org.eclipse.jdt.launching"/>
+      <import plugin="org.eclipse.ant.ui"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.eclipse.ui.externaltools"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.jdt.debug.ui"/>
+      <import plugin="org.eclipse.jdt.junit"/>
+      <import plugin="com.pfs.base" export="false"/>
+   </requires>
+   
+
+     <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Launchers"
+            visible="true"
+            id="com.pfs.launcher.QuickLaunchActionSet">
+         <action
+               toolbarPath="launcherGroup"
+               label="Run Launcher 5"
+               class="com.pfs.launcher.actions.LaunchRunAction$Fifth"
+               icon="icons/com.pfs.launcher.actions.RunLauncher5Action-unbound.gif"
+               definitionId="com.pfs.launcher.actions.RunLauncher5Command"
+               style="pulldown"
+               id="com.pfs.launcher.actions.RunLauncher5Action"/>
+         <action
+               toolbarPath="launcherGroup"
+               label="Run Launcher 4"
+               class="com.pfs.launcher.actions.LaunchRunAction$Fourth"
+               icon="icons/com.pfs.launcher.actions.RunLauncher4Action-unbound.gif"
+               definitionId="com.pfs.launcher.actions.RunLauncher4Command"
+               style="pulldown"
+               id="com.pfs.launcher.actions.RunLauncher4Action"/>
+         <action
+               toolbarPath="launcherGroup"
+               label="Run Launcher 3"
+               class="com.pfs.launcher.actions.LaunchRunAction$Third"
+               icon="icons/com.pfs.launcher.actions.RunLauncher3Action-unbound.gif"
+               definitionId="com.pfs.launcher.actions.RunLauncher3Command"
+               style="pulldown"
+               id="com.pfs.launcher.actions.RunLauncher3Action"/>
+         <action
+               toolbarPath="launcherGroup"
+               label="Run Launcher 2"
+               class="com.pfs.launcher.actions.LaunchRunAction$Second"
+               icon="icons/com.pfs.launcher.actions.RunLauncher2Action-unbound.gif"
+               definitionId="com.pfs.launcher.actions.RunLauncher2Command"
+               style="pulldown"
+               id="com.pfs.launcher.actions.RunLauncher2Action">
+         </action>
+         <action
+               toolbarPath="launcherGroup"
+               label="Run Launcher 1"
+               class="com.pfs.launcher.actions.LaunchRunAction$First"
+               icon="icons/com.pfs.launcher.actions.RunLauncher1Action-unbound.gif"
+               definitionId="com.pfs.launcher.actions.RunLauncher1Command"
+               style="pulldown"
+               id="com.pfs.launcher.actions.RunLauncher1Action"/>
+         <action
+               toolbarPath="launcherGroup"
+               label="Create Debug Launcher"
+               icon="icons/debug.gif"
+               class="com.pfs.launcher.actions.LaunchActiveAction$Debug"
+               definitionId="com.pfs.launcher.actions.DebugActiveCommand"
+               style="push"
+               id="com.pfs.launcher.actions.DebugActiveAction"/>
+         <action
+               toolbarPath="launcherGroup"
+               label="Create Run Launcher"
+               icon="icons/run.gif"
+               class="com.pfs.launcher.actions.LaunchActiveAction"
+               definitionId="com.pfs.launcher.actions.RunActiveCommand"
+               style="push"
+               id="com.pfs.launcher.actions.RunActiveAction"/>
+         <action
+               label="Debug Launcher 5"
+               class="com.pfs.launcher.actions.LaunchDebugAction$Fifth"
+               definitionId="com.pfs.launcher.actions.DebugLauncher5Command"
+               id="com.pfs.launcher.actions.DebugLauncher5Action"/>
+         <action
+               label="Debug Launcher 4"
+               class="com.pfs.launcher.actions.LaunchDebugAction$Fourth"
+               definitionId="com.pfs.launcher.actions.DebugLauncher4Command"
+               id="com.pfs.launcher.actions.DebugLauncher4Action"/>
+         <action
+               label="Debug Launcher 3"
+               class="com.pfs.launcher.actions.LaunchDebugAction$Third"
+               definitionId="com.pfs.launcher.actions.DebugLauncher3Command"
+               id="com.pfs.launcher.actions.DebugLauncher3Action"/>
+         <action
+               label="Debug Launcher 2"
+               class="com.pfs.launcher.actions.LaunchDebugAction$Second"
+               definitionId="com.pfs.launcher.actions.DebugLauncher2Command"
+               id="com.pfs.launcher.actions.DebugLauncher2Action">
+         </action>
+         <action
+               label="Debug Launcher 1"
+               class="com.pfs.launcher.actions.LaunchDebugAction$First"
+               definitionId="com.pfs.launcher.actions.DebugLauncher1Command"
+               id="com.pfs.launcher.actions.DebugLauncher1Action"/>
+         <action
+               label="Clear All Launchers"
+               class="com.pfs.launcher.actions.ClearLaunchersAction"
+               definitionId="com.pfs.launcher.actions.ClearAllLaunchersCommand"
+               style="push"
+               id="com.pfs.launcher.actions.ClearAllLaunchersAction"/>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="com.pfs.QuickLaunchCategory"
+            name="Quick Launch"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Run Launcher 1"
+            id="com.pfs.launcher.actions.RunLauncher1Command"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Run Launcher 2"
+            id="com.pfs.launcher.actions.RunLauncher2Command"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Run Launcher 3"
+            id="com.pfs.launcher.actions.RunLauncher3Command"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Run Launcher 4"
+            id="com.pfs.launcher.actions.RunLauncher4Command"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Run Launcher 5"
+            id="com.pfs.launcher.actions.RunLauncher5Command"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Debug Launcher 1"
+            id="com.pfs.launcher.actions.DebugLauncher1Command"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Debug Launcher 2"
+            id="com.pfs.launcher.actions.DebugLauncher2Command"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Debug Launcher 3"
+            id="com.pfs.launcher.actions.DebugLauncher3Command"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Debug Launcher 4"
+            id="com.pfs.launcher.actions.DebugLauncher4Command"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Debug Launcher 5"
+            id="com.pfs.launcher.actions.DebugLauncher5Command"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Clear All Launchers"
+            id="com.pfs.launcher.actions.ClearAllLaunchersCommand"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Run Active"
+            id="com.pfs.launcher.actions.RunActiveCommand"/>
+      <command
+            categoryId="com.pfs.QuickLaunchCategory"
+            name="Debug Active"
+            id="com.pfs.launcher.actions.DebugActiveCommand"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="com.pfs.launcher.preferences.PreferenceInitializer"/>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"
+            delegate="com.pfs.launcher.StaticMethodLaunchConfiguration"
+            sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer"
+            name="Static Method"
+            modes="run, debug"
+            id="com.pfs.launcher.StaticMethodLaunchConfigurationType">
+         <fileExtension
+               extension="java"
+               default="false"/>
+         <fileExtension
+               extension="class"
+               default="false"/>
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            type="com.pfs.launcher.StaticMethodLaunchConfigurationType"
+            class="com.pfs.launcher.StaticMethodTabGroup"
+            id="com.pfs.launcher.StaticMethodTabGroup">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            icon="icons/staticMethodLaunchConfig.gif"
+            configTypeID="com.pfs.launcher.StaticMethodLaunchConfigurationType"
+            id="com.pfs.launcher.StaticMethodLaunchConfigurationTypeImage"/>
+   </extension>
+   <extension
+         name="Necessary so the bound images will be properly initialized"
+         point="org.eclipse.ui.startup">
+   </extension>
+
+</plugin>
