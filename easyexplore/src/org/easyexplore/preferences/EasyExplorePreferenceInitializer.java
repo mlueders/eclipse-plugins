@@ -11,8 +11,7 @@ public class EasyExplorePreferenceInitializer extends AbstractPreferenceInitiali
 
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = EasyExplorePlugin.getDefault().getPreferenceStore();
-		store.setDefault(EasyExplorePreferencePage.P_EXPLORE_TARGET, "explorer.exe {0}");
-		// quotes are necessary around {0} in case there's a space in the directory name
-		store.setDefault(EasyExplorePreferencePage.P_CMD_TARGET, "cmd.exe /k start \"Eclipse Command\" /D\"{0}\"");
+		store.setDefault(EasyExplorePreferencePage.P_EXPLORE_TARGET, EasyExplorePreferencePage.LINUX_EXPLORE_TARGET);
+		store.setDefault(EasyExplorePreferencePage.P_CMD_TARGET, EasyExplorePreferencePage.LINUX_CMD_TARGET);
 	}
 }
