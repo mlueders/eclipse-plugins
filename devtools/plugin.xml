@@ -22,6 +22,7 @@
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui.editors"/>
       <import plugin="com.pfs.base" export="false"/>
+      <import plugin="org.eclipse.e4.ui.model.workbench" version="0.10.1"/>
    </requires>
    <extension
          point="org.eclipse.ui.startup">

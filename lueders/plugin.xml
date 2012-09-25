@@ -36,6 +36,23 @@
             id="com.pfs.lueders.MyPerspective"/>
    </extension>
    
+   
+   <extension
+         point="org.eclipse.ui.editors.templates">
+      <template
+            id="com.pfs.sysout"
+            contextTypeId="java"
+            name="sout"
+            description="System.out">
+         <pattern>System.out.prinltn(${cursor});</pattern>
+      </template>
+   </extension>
+
+   
+   <!-- NOTE: not sure why, but some bindings *must* be defined within the org.eclipse.ui.contexts.window context 
+        or they don't work, no idea why.  So, if a binding isn't working when defined with the appropriate scope, 
+        try expanding the scope. 
+    -->
    <extension
          point="org.eclipse.ui.bindings">
       <scheme
@@ -250,11 +267,6 @@
          sequence="Alt+C"/>
       <key
          contextId="org.eclipse.ui.globalScope"
-         commandId="org.eclipse.ui.edit.text.deleteNext"
-         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Ctrl+D"/>
-      <key
-         contextId="org.eclipse.ui.globalScope"
          commandId="org.eclipse.ui.edit.text.deletePrevious"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
          sequence="Alt+H"/>
@@ -285,34 +297,24 @@
          sequence="Alt+7"/>
       <key
          contextId="org.eclipse.ui.textEditorScope"
-         commandId="org.eclipse.ui.edit.text.shiftLeft"
-         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Ctrl+ARROW_LEFT"/>
-      <key
-         contextId="org.eclipse.ui.textEditorScope"
          commandId="org.eclipse.ui.edit.text.shiftRight"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
          sequence="Alt+8"/>
       <key
          contextId="org.eclipse.ui.textEditorScope"
-         commandId="org.eclipse.ui.edit.text.shiftRight"
+         commandId="org.eclipse.ui.edit.text.shiftLeft"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Ctrl+ARROW_RIGHT"/>
+         sequence="Alt+ARROW_LEFT"/>
       <key
          contextId="org.eclipse.ui.textEditorScope"
-         commandId="org.eclipse.ui.edit.text.moveLineUp"
+         commandId="org.eclipse.ui.edit.text.shiftRight"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Ctrl+ARROW_UP"/>
+         sequence="Alt+ARROW_RIGHT"/>
       <key
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.ui.edit.text.moveLineUp"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
          sequence="Alt+ARROW_UP"/>
-      <key
-         contextId="org.eclipse.ui.textEditorScope"
-         commandId="org.eclipse.ui.edit.text.moveLineDown"
-         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-	     sequence="Ctrl+ARROW_DOWN"/>
       <key
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.ui.edit.text.moveLineDown"
@@ -320,9 +322,39 @@
          sequence="Alt+ARROW_DOWN"/>
       <key
          contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.select.previous"
+         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
+         sequence="Alt+Shift+ARROW_LEFT"/>
+      <key contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.select.next"
+         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
+         sequence="Alt+Shift+ARROW_RIGHT"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.select.enclosing"
+         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
+         sequence="Alt+Shift+ARROW_UP"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.select.last"
+         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
+         sequence="Alt+Shift+ARROW_DOWN"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         commandId="org.eclipse.ui.edit.text.select.lineUp"
+         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
+         sequence="Alt+SHIFT+P"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         commandId="org.eclipse.ui.edit.text.select.lineDown"
+         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
+         sequence="Alt+SHIFT+N"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
          commandId="org.eclipse.jdt.ui.edit.text.java.format"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
          sequence="Alt+Shift+F"/>
+         
 <!--
       <key
          contextId="org.eclipse.ant.ui.AntEditorScope"
@@ -336,14 +368,14 @@
          
       <key
          contextId="org.eclipse.ui.contexts.window"
-         commandId="org.eclipse.ui.window.activateEditor"
-         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+3"/>
-      <key
-         contextId="org.eclipse.ui.contexts.window"
          commandId="com.pfs.devtools.ActivateMyPerspectiveCommand"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
          sequence="Alt+2"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.window.activateEditor"
+         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
+         sequence="Alt+3"/>
       <key
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.debug.ui.DebugPerspective"
@@ -351,72 +383,74 @@
          sequence="Alt+4"/>
       <key
          contextId="org.eclipse.ui.contexts.window"
-         commandId="org.eclipse.ui.console.ConsoleView"
+         commandId="org.eclipse.ui.navigate.showIn"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+X C"/>
+         sequence="Alt+X C">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.ui.console.ConsoleView"/>         
+      </key>
       <key
          contextId="org.eclipse.ui.contexts.window"
-         commandId="org.eclipse.debug.ui.BreakpointView"
+         commandId="org.eclipse.ui.navigate.showIn"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+X B"/>
+         sequence="Alt+X B">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.debug.ui.BreakpointView"/>        
+      </key>
       <key
          contextId="org.eclipse.ui.contexts.window"
-         commandId="org.eclipse.debug.ui.DebugView"
+         commandId="org.eclipse.ui.navigate.showIn"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+X D"/>
+         sequence="Alt+X D">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.debug.ui.DebugView"/>         
+      </key>
       <key
          contextId="org.eclipse.ui.contexts.window"
-         commandId="org.eclipse.pde.runtime.LogView"
+         commandId="org.eclipse.ui.navigate.showIn"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+X E"/>
+         sequence="Alt+X E">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.pde.runtime.LogView"/>         
+      </key>
       <key
          contextId="org.eclipse.ui.contexts.window"
-         commandId="org.eclipse.jdt.ui.TypeHierarchy"
+         commandId="org.eclipse.ui.navigate.showIn"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+X H"/>
+         sequence="Alt+X T">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.jdt.ui.TypeHierarchy"/>         
+      </key>
       <key
          contextId="org.eclipse.ui.contexts.window"
-         commandId="org.eclipse.jdt.ui.TypeHierarchy"
+         commandId="org.eclipse.ui.navigate.showIn"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+X T"/>
-      <key
-         contextId="org.eclipse.ui.contexts.window"
-         commandId="org.eclipse.jdt.junit.ResultView"
-         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+X J"/>
-      <key
-         contextId="org.eclipse.ui.contexts.window"
-         commandId="com.pfs.devtools.ActivateEditorListCommand"
-         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+X L"/>
+         sequence="Alt+X J">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.jdt.junit.ResultView"/>         
+      </key>
       <key
          commandId="org.eclipse.ui.views.showView"
          contextId="org.eclipse.ui.contexts.window"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
          sequence="Alt+X O">
-         <parameter
-               id="org.eclipse.ui.views.showView.viewId"
-               value="org.eclipse.ui.views.ContentOutline"/>
+         <parameter id="org.eclipse.ui.views.showView.viewId" value="org.eclipse.ui.views.ContentOutline"/>
       </key>
       <key
          commandId="org.eclipse.ui.views.showView"
          contextId="org.eclipse.ui.contexts.window"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
          sequence="Alt+X P">
-         <parameter
-               id="org.eclipse.ui.views.showView.viewId"
-               value="org.eclipse.ui.views.ProblemView"/>
+         <parameter id="org.eclipse.ui.views.showView.viewId" value="org.eclipse.ui.views.ProblemView"/>
       </key>
       <key
          contextId="org.eclipse.ui.contexts.window"
-         commandId="org.eclipse.search.ui.views.SearchView"
+         commandId="org.eclipse.ui.navigate.showIn"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+X S"/>
+         sequence="Alt+X S">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.search.ui.views.SearchView"/>         
+      </key>
       <key
          contextId="org.eclipse.ui.contexts.window"
-         commandId="org.eclipse.debug.ui.VariableView"
+         commandId="org.eclipse.ui.navigate.showIn"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+X V"/>
+         sequence="Alt+X V">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.debug.ui.VariableView"/>         
+      </key>
       <key
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.ui.window.nextEditor"
@@ -429,7 +463,7 @@
          sequence="Alt+CR"/>
       <key
          contextId="org.eclipse.jdt.ui.javaEditorScope"
-         commandId="dk.kamstruplinnet.implementors.ui.goto.implementor.action.key"
+         commandId="org.eclipse.jdt.ui.edit.text.java.open.implementation"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
          sequence="Ctrl+CR"/>
       <key
@@ -528,6 +562,11 @@
       <!-- *********** -->
          
       <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.correction.assignToLocal.assist"
+         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
+         sequence="Ctrl+X A"/>
+      <key
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.jdt.ui.edit.text.java.generate.constructor.using.fields"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
@@ -608,25 +647,6 @@
       <!-- **** -->
       
       <key
-         contextId="org.eclipse.jdt.ui.javaEditorScope"
-         commandId="org.eclipse.jdt.ui.edit.text.java.select.last"
-         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+Shift+ARROW_DOWN"/>
-      <key
-         contextId="org.eclipse.jdt.ui.javaEditorScope"
-         commandId="org.eclipse.jdt.ui.edit.text.java.select.previous"
-         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+Shift+ARROW_LEFT"/>
-      <key contextId="org.eclipse.jdt.ui.javaEditorScope"
-         commandId="org.eclipse.jdt.ui.edit.text.java.select.next"
-         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+Shift+ARROW_RIGHT"/>
-      <key
-         contextId="org.eclipse.jdt.ui.javaEditorScope"
-         commandId="org.eclipse.jdt.ui.edit.text.java.select.enclosing"
-         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+Shift+ARROW_UP"/>
-      <key
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.jdt.ui.edit.text.java.show.outline"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
@@ -636,11 +656,6 @@
          commandId="org.eclipse.jdt.ui.edit.text.java.open.type.hierarchy"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
          sequence="Alt+Shift+H"/>
-      <key
-         contextId="org.eclipse.ui.contexts.window"
-         commandId="org.eclipse.ui.newWizard"
-         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+Shift+N"/>
       <key
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.jdt.ui.edit.text.java.search.declarations.in.project"
@@ -877,5 +892,849 @@
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
          sequence="Ctrl+Alt+Shift+N"/>
 -->         
+   </extension>    
+    
+   <extension
+         point="org.eclipse.ui.bindings">
+      <scheme
+         id="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         name="LuedersMac"
+         parentId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+            
+      <!-- ************************* -->
+      <!-- unbind existing conflicts -->
+      <!-- ************************* -->
+      
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+ARROW_DOWN"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         sequence="COMMAND+ARROW_UP"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+ARROW_LEFT"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         sequence="COMMAND+ARROW_RIGHT"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+Shift+O"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="Ctrl+Shift+F"/>
+      <key
+         contextId="org.eclipse.ant.ui.AntEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="Ctrl+Shift+F"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="Ctrl+D"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         sequence="Ctrl+K"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="Ctrl+V"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+/"/>
+      <key
+         contextId="org.eclipse.ui.contexts.dialogAndWindow"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="Ctrl+Shift+F6"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="Ctrl+Shift+F7"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="Ctrl+Shift+F8"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="Ctrl+J"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="Ctrl+L"/>
+
+      <!-- ********************* -->
+      <!-- position manipulation -->
+      <!-- ********************* -->
+      
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         commandId="org.eclipse.ui.edit.text.goto.line"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+G"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.goto.lineStart"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+A"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.goto.lineEnd"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+E"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.goto.lineDown"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+N"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.goto.lineUp"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+P"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.goto.pageDown"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+V"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.goto.pageUp"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+V"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.goto.columnPrevious"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+B"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.goto.columnNext"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+F"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.goto.textStart"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+,"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.goto.textEnd"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+."/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.goto.next.member"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+."/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.goto.previous.member"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+,"/>
+      <key 
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.goto.wordPrevious"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+B"/>
+      <key 
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.goto.wordNext"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+F"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.findIncremental"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+S"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.findIncrementalReverse"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+R"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="com.pfs.devtools.NavigatePreviousMarkOccurrenceCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+J"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="com.pfs.devtools.NavigateNextMarkOccurrenceCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+L"/>
+         
+      <!-- ***************** -->
+      <!-- text manipulation -->
+      <!-- ***************** -->
+      
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.edit.text.cut.line.to.end"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+K"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.edit.text.cut.line"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+K"/>
+      <key 
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.edit.copy"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+W"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.edit.cut"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+W"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.edit.paste"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Y"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.edit.paste"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+`"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.edit.text.deleteNext"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+C"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.edit.text.deletePrevious"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+H"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.edit.text.deletePreviousWord"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+BS"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.edit.text.deleteNextWord"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+D"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.edit.undo"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+/"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.edit.redo"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+/"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         commandId="org.eclipse.ui.edit.text.shiftLeft"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+7"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         commandId="org.eclipse.ui.edit.text.shiftRight"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+8"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.shiftLeft"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+ARROW_LEFT"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.shiftRight"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+ARROW_RIGHT"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.moveLineUp"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+ARROW_UP"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.moveLineDown"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+ARROW_DOWN"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.select.previous"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+ARROW_LEFT"/>
+      <key contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.select.next"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+ARROW_RIGHT"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.jdt.ui.edit.text.java.select.enclosing"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+ARROW_UP"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.jdt.ui.edit.text.java.select.last"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+ARROW_DOWN"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         commandId="org.eclipse.ui.edit.text.select.lineUp"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+SHIFT+P"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         commandId="org.eclipse.ui.edit.text.select.lineDown"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+SHIFT+N"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.format"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+F"/>
+<!--
+      <key
+         contextId="org.eclipse.ant.ui.AntEditorScope"
+         commandId="org.eclipse.ant.ui.format"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+F"/>
+-->
+      <!-- ************************** -->
+      <!-- window/editor manipulation -->
+      <!-- ************************** -->
+         
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.devtools.ActivateMyPerspectiveCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+2"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.window.activateEditor"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+3"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.debug.ui.DebugPerspective"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+4"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.navigate.showIn"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X C">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.ui.console.ConsoleView"/>         
+      </key>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.navigate.showIn"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X B">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.debug.ui.BreakpointView"/>        
+      </key>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.navigate.showIn"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X D">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.debug.ui.DebugView"/>         
+      </key>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.navigate.showIn"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X E">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.pde.runtime.LogView"/>         
+      </key>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.navigate.showIn"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X T">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.jdt.ui.TypeHierarchy"/>         
+      </key>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.navigate.showIn"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X J">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.jdt.junit.ResultView"/>         
+      </key>
+      <key
+         commandId="org.eclipse.ui.views.showView"
+         contextId="org.eclipse.ui.contexts.window"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X O">
+         <parameter id="org.eclipse.ui.views.showView.viewId" value="org.eclipse.ui.views.ContentOutline"/>
+      </key>
+      <key
+         commandId="org.eclipse.ui.views.showView"
+         contextId="org.eclipse.ui.contexts.window"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X P">
+         <parameter id="org.eclipse.ui.views.showView.viewId" value="org.eclipse.ui.views.ProblemView"/>
+      </key>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.navigate.showIn"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X S">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.search.ui.views.SearchView"/>         
+      </key>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.navigate.showIn"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X V">
+         <parameter id="org.eclipse.ui.navigate.showIn.targetId" value="org.eclipse.debug.ui.VariableView"/>         
+      </key>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.window.nextEditor"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+9"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.open.editor"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+CR"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.open.implementation"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+CR"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.navigate.forwardHistory"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+I"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.navigate.backwardHistory"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+U"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.window.nextPerspective"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+8"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.window.nextView"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+9"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.devtools.ActivatePreviousEditorCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+-"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.devtools.ActivateNextEditorCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+="/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.search.ui.openFileSearchPage"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="CTRL+SHIFT+S"/>
+         
+      <!-- ********* -->
+      <!-- debugging -->
+      <!-- ********* -->
+      
+      <key 
+         contextId="org.eclipse.debug.ui.debugging" 
+         commandId="org.eclipse.debug.ui.commands.Resume" 
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration" 
+         sequence="COMMAND+ARROW_UP"/>
+      <key 
+         contextId="org.eclipse.debug.ui.debugging" 
+         commandId="org.eclipse.debug.ui.commands.StepOver" 
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration" 
+         sequence="COMMAND+ARROW_DOWN"/>
+      <key 
+         contextId="org.eclipse.debug.ui.debugging" 
+         commandId="org.eclipse.debug.ui.commands.StepInto" 
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration" 
+         sequence="COMMAND+ARROW_RIGHT"/>
+      <key 
+         contextId="org.eclipse.debug.ui.debugging" 
+         commandId="org.eclipse.debug.ui.commands.StepReturn" 
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration" 
+         sequence="COMMAND+ARROW_LEFT"/>
+      <key 
+         contextId="org.eclipse.debug.ui.debugging" 
+         commandId="org.eclipse.debug.ui.commands.Resume" 
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration" 
+         sequence="Ctrl+U"/>
+      <key 
+         contextId="org.eclipse.debug.ui.debugging" 
+         commandId="org.eclipse.debug.ui.commands.StepOver" 
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration" 
+         sequence="Ctrl+N"/>
+      <key 
+         contextId="org.eclipse.debug.ui.debugging" 
+         commandId="org.eclipse.debug.ui.commands.StepInto" 
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration" 
+         sequence="Ctrl+I"/>
+      <key 
+         contextId="org.eclipse.debug.ui.debugging" 
+         commandId="org.eclipse.debug.ui.commands.StepReturn" 
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration" 
+         sequence="Ctrl+O"/>
+      <key 
+         contextId="org.eclipse.debug.ui.debugging" 
+         commandId="org.eclipse.debug.ui.commands.Terminate" 
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration" 
+         sequence="COMMAND+Shift+BS"/>
+      <key 
+         contextId="org.eclipse.ui.textEditorScope"
+         commandId="com.pfs.devtools.ToggleBreakPointCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration" 
+         sequence="COMMAND+Shift+B"/>
+         
+      <!-- *********** -->
+      <!-- refactoring -->
+      <!-- *********** -->
+         
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.correction.assignToLocal.assist"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X A"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.generate.constructor.using.fields"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X F"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.extract.interface"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X I"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.extract.method"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X E"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.add.unimplemented.constructors"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X C"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.create.getter.setter"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X G"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.override.methods"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X O"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.create.delegate.methods"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X D"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.modify.method.parameters"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X S"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.move.element"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X M"/>
+         
+      <!-- *** -->
+      <!-- CVS -->
+      <!-- *** -->
+      
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.team.cvs.ui.update"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+X U"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.team.cvs.ui.commit"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+X T"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.team.cvs.ui.showHistory"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+X H"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.team.cvs.ui.replace"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+X R"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.team.cvs.ui.compareWithRemote"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+X C"/>
+         
+      <!-- **** -->
+      <!-- misc -->
+      <!-- **** -->
+      
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.jdt.ui.edit.text.java.show.outline"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+O"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.jdt.ui.edit.text.java.open.type.hierarchy"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+H"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.jdt.ui.edit.text.java.search.declarations.in.project"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+COMMAND+S"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.jdt.ui.edit.text.java.search.references.in.project"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+S"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.navigate.next"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+N"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.navigate.previous"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+P"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+J"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.jdt.ui.edit.text.java.correction.assist.proposals"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+SPACE"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="org.eclipse.jdt.ui.edit.text.java.toggleMarkOccurrences"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+="/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.file.save"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+S"/>
+      <key 
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.file.close"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X K"/>         
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.project.buildAll"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X B"/>
+      <key 
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.ui.edit.findReplace"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+R"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.jdt.ui.edit.text.java.toggle.comment"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+C"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="org.eclipse.jdt.ui.edit.text.java.organize.imports"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+I"/>
+         
+      <!-- ************ -->
+      <!-- quick launch -->
+      <!-- ************ -->
+      
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.RunActiveCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+7"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.DebugActiveCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+Shift+7"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.RunLauncher1Command"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+F6"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.RunLauncher2Command"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+F7"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.RunLauncher3Command"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+F8"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.RunLauncher4Command"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+F9"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.RunLauncher5Command"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+F10"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.DebugLauncher1Command"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+Shift+F6"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.DebugLauncher2Command"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+Shift+F7"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.DebugLauncher3Command"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+Shift+F8"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.DebugLauncher4Command"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+Shift+F9"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.DebugLauncher5Command"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+Shift+F10"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="com.pfs.launcher.actions.ClearAllLaunchersCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+COMMAND+F12"/>
+            
+      <!-- ********* -->
+      <!-- dev tools -->
+      <!-- ********* -->
+      
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         commandId="com.pfs.devtools.CopyQualifiedClassNameToClipboardCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+COMMAND+K"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="com.pfs.devtools.ShowInPackageExplorerCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Q"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="com.pfs.devtools.MinimizeConsoleCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+M"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="com.pfs.devtools.MaximizeConsoleCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+COMMAND+M"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.window.minimizePart"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X N"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.window.maximizePart"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X M"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="com.pfs.devtools.HideActiveViewCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+X K"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="com.pfs.devtools.HideActiveViewCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+K"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="com.pfs.devtools.TerminateAllAndClearCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X T"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="com.pfs.devtools.TerminateLastLaunchedCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+X L"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="com.pfs.devtools.OpenTypeAnywhereCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+O"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.eclipse.ui.navigate.openResource"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+Shift+E"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         commandId="com.pfs.devtools.CenterEditorCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="COMMAND+L"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         commandId="com.pfs.devtools.ActivateNotesEditorCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+COMMAND+N"/>
+            
+      <!-- ************ -->
+      <!-- easy explore -->
+      <!-- ************ -->
+      
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.easyexplore.actions.EasyCmdCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+COMMAND+C"/>
+      <key
+         contextId="org.eclipse.ui.globalScope"
+         commandId="org.easyexplore.actions.EasyExploreCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+COMMAND+E"/>
+            
+      <!-- *********** -->
+      <!-- editor list -->
+      <!-- *********** -->
+<!--
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         commandId="EditorList.createWorkingSetFromActiveEditorsCommand"
+         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
+         sequence="Ctrl+COMMAND+Shift+N"/>
+-->         
    </extension>
+
 </plugin>
