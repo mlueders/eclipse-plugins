@@ -120,6 +120,19 @@
          contextId="org.eclipse.ui.textEditorScope"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="Ctrl+L"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="Alt+2 f"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="Alt+2 L"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="Alt+2 R"/>
+
 
       <!-- ********************* -->
       <!-- position manipulation -->
@@ -697,6 +710,11 @@
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
          sequence="Alt+S"/>
       <key 
+         contextId="org.eclipse.ui.textEditorScope"
+         commandId="org.eclipse.ui.file.close"
+         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
+         sequence="Ctrl+K"/>         
+      <key 
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.ui.file.close"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
@@ -969,6 +987,18 @@
          contextId="org.eclipse.ui.textEditorScope"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="Ctrl+L"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+2 f"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+2 L"/>
+      <key
+         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+2 R"/>
 
       <!-- ********************* -->
       <!-- position manipulation -->
@@ -1539,6 +1569,11 @@
          commandId="org.eclipse.ui.file.save"
          schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
          sequence="COMMAND+S"/>
+      <key 
+         contextId="org.eclipse.ui.textEditorScope"
+         commandId="org.eclipse.ui.file.close"
+         schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
+         sequence="Ctrl+K"/>         
       <key 
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.ui.file.close"
