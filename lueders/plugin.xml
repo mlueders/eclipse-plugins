@@ -44,7 +44,7 @@
             contextTypeId="java"
             name="sout"
             description="System.out">
-         <pattern>System.out.prinltn(${cursor});</pattern>
+         <pattern>System.out.println(${cursor});</pattern>
       </template>
    </extension>
 
@@ -123,7 +123,7 @@
       <key
          contextId="org.eclipse.jdt.ui.javaEditorScope"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-         sequence="Alt+2 f"/>
+         sequence="Alt+2 F"/>
       <key
          contextId="org.eclipse.jdt.ui.javaEditorScope"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
@@ -990,7 +990,7 @@
       <key
          contextId="org.eclipse.jdt.ui.javaEditorScope"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-         sequence="COMMAND+2 f"/>
+         sequence="COMMAND+2 F"/>
       <key
          contextId="org.eclipse.jdt.ui.javaEditorScope"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
@@ -999,6 +999,42 @@
          contextId="org.eclipse.jdt.ui.javaEditorScope"
          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
          sequence="COMMAND+2 R"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+3"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+B"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+E"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+F"/>
+      <key
+         contextId="org.eclipse.ui.textEditorScope"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+L"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+N"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+P"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+U"/>
+      <key
+         contextId="org.eclipse.ui.contexts.window"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="COMMAND+W"/>
 
       <!-- ********************* -->
       <!-- position manipulation -->
@@ -1564,11 +1600,6 @@
          commandId="org.eclipse.jdt.ui.edit.text.java.toggleMarkOccurrences"
          schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
          sequence="COMMAND+Shift+="/>
-      <key
-         contextId="org.eclipse.ui.globalScope"
-         commandId="org.eclipse.ui.file.save"
-         schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
-         sequence="COMMAND+S"/>
       <key 
          contextId="org.eclipse.ui.textEditorScope"
          commandId="org.eclipse.ui.file.close"
