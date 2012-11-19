@@ -21,7 +21,7 @@ public class DerivedDirectoryMarker {
 	
 	private List<String> getDerivedFolderNamesListFromWorkspacePreferences() {
 		String derivedFolderNamesString = DevToolsPlugin.getDefault().getStringPreference(PreferenceConstants.DERIVED_FOLDER_NAMES);
-		String[] derivedFolderNames = derivedFolderNamesString.split("\\s*,\\s*");
+		String[] derivedFolderNames = derivedFolderNamesString.split("\\s+");
 		return Arrays.asList(derivedFolderNames);
 	}
 	
