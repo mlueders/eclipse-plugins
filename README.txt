@@ -4,9 +4,8 @@ Unzip plugins.zip into $ECLIPSE_HOME/dropins/eclipse
 
 To generate, open feature/feature.xml
 Overview > Export Wizard
-Under Options tab, select
+Under Options tab, ensure *only* the following are selected 
  - Export Source (Generate source bundles)
- - Package as individual JAR archives
  - Allow for binary cycles
  - Use class files compiled in workspace
 Select Destination and Finish
