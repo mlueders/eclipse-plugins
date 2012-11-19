@@ -10,4 +10,6 @@ public interface PreferenceConstants {
 	PreferenceNameFactory FACTORY = new PreferenceNameFactory(PreferenceConstants.class);
 
 	String INITIAL_DEFAULT_VM_ARGS = FACTORY.createPreferenceName("initialDefaultVMArgsPreference");
+	
+	String DERIVED_FOLDER_NAMES = FACTORY.createPreferenceName("derivedDirectoryNamesPreference");
 }

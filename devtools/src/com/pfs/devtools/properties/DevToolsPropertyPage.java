@@ -40,18 +40,16 @@ public class DevToolsPropertyPage extends PropertyPage {
 		composite.setLayout(layout);
 		GridData data = new GridData(GridData.FILL);
 		composite.setLayoutData(data);
+		data.grabExcessHorizontalSpace = true;
 
 		Label vmArgsLabel = new Label(composite, SWT.NONE);
-		vmArgsLabel.setText("D&efault VM Args");
-
-		data.grabExcessHorizontalSpace = true;
-		// Owner text field
+		vmArgsLabel.setText("Default &VM Args");
 		defaultVmArgsText = new Text(composite, SWT.SINGLE | SWT.BORDER);
 		defaultVmArgsText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
+		
 		try {
-			String text = ((IResource) getElement()).getPersistentProperty(PropertyConstants.DEFAULT_VM_ARGS_PROPERTY);
-			defaultVmArgsText.setText((text != null) ? text : "");
+			String defaultVmArgs = ((IResource) getElement()).getPersistentProperty(PropertyConstants.DEFAULT_VM_ARGS_PROPERTY);
+			defaultVmArgsText.setText((defaultVmArgs != null) ? defaultVmArgs : "");
 		} catch (CoreException e) {
 			defaultVmArgsText.setText("");
 		}
@@ -60,16 +58,17 @@ public class DevToolsPropertyPage extends PropertyPage {
 	}
 
 	protected void performDefaults() {
-		String initialValue = DevToolsPlugin.getDefault().getStringPreference(PreferenceConstants.INITIAL_DEFAULT_VM_ARGS);
-
-		defaultVmArgsText.setText(initialValue);
+		String defaultVmArgs = DevToolsPlugin.getDefault().getStringPreference(PreferenceConstants.INITIAL_DEFAULT_VM_ARGS);
+		defaultVmArgsText.setText(defaultVmArgs);
 	}
 
 	public boolean performOk() {
 		// store the value in the owner text field
 		try {
+			IResource resource = (IResource) getElement();
+			
 			String defaultVmArgs = defaultVmArgsText.getText();
-			((IResource) getElement()).setPersistentProperty(PropertyConstants.DEFAULT_VM_ARGS_PROPERTY, defaultVmArgs);
+			resource.setPersistentProperty(PropertyConstants.DEFAULT_VM_ARGS_PROPERTY, defaultVmArgs);
 		} catch (CoreException e) {
 			return false;
 		}

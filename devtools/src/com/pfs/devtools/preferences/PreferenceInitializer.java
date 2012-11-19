@@ -14,5 +14,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		IPreferenceStore store = DevToolsPlugin.getDefault().getPreferenceStore();
 
 		store.setDefault(PreferenceConstants.INITIAL_DEFAULT_VM_ARGS, "");
+		store.setDefault(PreferenceConstants.DERIVED_FOLDER_NAMES, "");
 	}
 }

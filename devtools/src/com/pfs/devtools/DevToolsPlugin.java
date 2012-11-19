@@ -2,6 +2,8 @@ package com.pfs.devtools;
 
 import com.pfs.base.BasePlugin;
 
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.ui.IStartup;
@@ -37,6 +39,9 @@ public class DevToolsPlugin extends BasePlugin implements IStartup {
 
 		DevToolsProjectAddedListener resourceListener = new DevToolsProjectAddedListener();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceListener);
+		
+		DerivedDirectoryMarkerFolderAddedListener derivedDirectoryMarkerListener = new DerivedDirectoryMarkerFolderAddedListener();
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(derivedDirectoryMarkerListener);
 	}
 
 	@Override

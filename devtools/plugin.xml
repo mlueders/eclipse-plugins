@@ -135,6 +135,12 @@
                definitionId="com.pfs.devtools.NavigatePreviousMarkOccurrenceCommand"
                style="push"
                id="com.pfs.devtools.NavigatePreviousMarkOccurrenceAction"/>
+         <action
+               label="Mark Derived Directories"
+               class="com.pfs.devtools.actions.MarkDerivedDirectoriesInWorkspaceAction"
+               definitionId="com.pfs.devtools.MarkDerivedDirectoriesCommand"
+               style="push"
+               id="com.pfs.devtools.MarkDerivedDirectoriesAction"/>
       </actionSet>
    </extension>
    <extension
@@ -210,6 +216,10 @@
             categoryId="com.pfs.DevToolsCategory"
             name="Previous Marked Occurrence"
             id="com.pfs.devtools.NavigatePreviousMarkOccurrenceCommand"/>
+      <command
+            categoryId="com.pfs.DevToolsCategory"
+            name="Mark Derived Directories"
+            id="com.pfs.devtools.MarkDerivedDirectoriesCommand"/>
    </extension>
    <extension
          point="org.eclipse.ui.viewActions">
@@ -224,6 +234,13 @@
                class="com.pfs.devtools.actions.ShowInPackageExplorerAction"
                style="push"
                id="com.pfs.devtools.ShowInPackageExplorerViewAction"/>
+         <action
+               toolbarPath="additions"
+               label="M"
+               tooltip="Mark Derived Directories"
+               class="com.pfs.devtools.actions.MarkDerivedDirectoriesInWorkspaceAction"
+               style="push"
+               id="com.pfs.devtools.MarkDerivedDirectoriesViewAction"/>
       </viewContribution>
    </extension>
    <extension

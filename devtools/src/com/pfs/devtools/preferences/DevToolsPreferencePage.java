@@ -38,6 +38,8 @@ public class DevToolsPreferencePage extends FieldEditorPreferencePage implements
 			setPreference("org.eclipse.jdt.ui", "smart_opening_brace", true);
 			setPreference("org.eclipse.debug.ui", "Console.lowWaterMark", 500000);
 			setPreference("org.eclipse.debug.ui", "Console.highWaterMark", 508000);
+			setPreference("org.eclipse.team.ui", "org.eclipse.team.ui.sychronizing_default_participant", "org.tigris.subversion.subclipse.participant");
+			
 			/*
 			String osName = System.getProperty("os.name");
 			if (osName.toLowerCase().contains("mac")) {
@@ -75,7 +77,9 @@ public class DevToolsPreferencePage extends FieldEditorPreferencePage implements
 	}
 
 	public void createFieldEditors() {
-		addField(new StringFieldEditor(PreferenceConstants.INITIAL_DEFAULT_VM_ARGS, "&Initial Default VM Args:",
+		addField(new StringFieldEditor(PreferenceConstants.INITIAL_DEFAULT_VM_ARGS, "Initial Default &VM Args:",
+				getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceConstants.DERIVED_FOLDER_NAMES, "Initial &Derived Directory Names:",
 				getFieldEditorParent()));
 		addField(new InitWorkspaceDefaults(getFieldEditorParent()));
 	}

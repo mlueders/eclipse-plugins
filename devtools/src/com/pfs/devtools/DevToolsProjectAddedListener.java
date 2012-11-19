@@ -30,10 +30,10 @@ public class DevToolsProjectAddedListener implements IResourceChangeListener {
 	}
 
 	private void projectAdded(IProject project) {
-		String defaultValue = DevToolsPlugin.getDefault().getStringPreference(PreferenceConstants.INITIAL_DEFAULT_VM_ARGS);
+		String defaultInitialVmArgs = DevToolsPlugin.getDefault().getStringPreference(PreferenceConstants.INITIAL_DEFAULT_VM_ARGS);
 
 		try {
-			project.setPersistentProperty(PropertyConstants.DEFAULT_VM_ARGS_PROPERTY, defaultValue);
+			project.setPersistentProperty(PropertyConstants.DEFAULT_VM_ARGS_PROPERTY, defaultInitialVmArgs);
 		} catch (CoreException ex) {
 			DevToolsPlugin.getDefault().showError(ex);
 		}
