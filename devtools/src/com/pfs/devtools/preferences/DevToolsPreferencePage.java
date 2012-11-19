@@ -35,17 +35,21 @@ public class DevToolsPreferencePage extends FieldEditorPreferencePage implements
 		
 		private void resetDefaultPreferences() throws Exception {
 			setPreference("org.eclipse.core.resources", "description.autobuilding", false);
+			setPreference("org.eclipse.debug.ui", "Console.lowWaterMark", 500000);
+			setPreference("org.eclipse.debug.ui", "Console.highWaterMark", 508000);
+			setPreference("org.eclipse.debug.ui", "org.eclipse.debug.ui.switch_perspective_on_suspend", "always");
+			setPreference("org.eclipse.jdt.ui", "smart_semicolon", true);
+			setPreference("org.eclipse.jdt.ui", "smart_opening_brace", true);
+			setPreference("org.eclipse.jdt.ui", "content_assist_guess_method_arguments", true);
+			setPreference("org.eclipse.team.ui", "org.eclipse.team.ui.sychronizing_default_participant", "org.tigris.subversion.subclipse.participant");
 			setPreference("org.eclipse.ui", "SHOW_TEXT_ON_PERSPECTIVE_BAR", false);
 			setPreference("org.eclipse.ui.editors", "lineNumberRuler", true);
 			setPreference("org.eclipse.ui.editors", "spellingEnabled", false);
 			setPreference("org.eclipse.ui.ide", "EXIT_PROMPT_ON_CLOSE_LAST_WINDOW", false);
 			setPreference("org.eclipse.ui.ide", "SAVE_ALL_BEFORE_BUILD", true);
-			setPreference("org.eclipse.jdt.ui", "smart_semicolon", true);
-			setPreference("org.eclipse.jdt.ui", "smart_opening_brace", true);
-			setPreference("org.eclipse.jdt.ui", "content_assist_guess_method_arguments", true);
-			setPreference("org.eclipse.debug.ui", "Console.lowWaterMark", 500000);
-			setPreference("org.eclipse.debug.ui", "Console.highWaterMark", 508000);
-			setPreference("org.eclipse.team.ui", "org.eclipse.team.ui.sychronizing_default_participant", "org.tigris.subversion.subclipse.participant");
+			setPreference("org.eclipse.ui.workbench", "RUN_IN_BACKGROUND", true);
+			setPreference("org.tigris.subversion.subclipse.tools.usage", "allow_usage_report_preference", true);
+			setPreference("org.tigris.subversion.subclipse.tools.usage", "ask_user_for_usage_report_preference", false);
 			initializeMyKeyBindings();
 		}
 		
