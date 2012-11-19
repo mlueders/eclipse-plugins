@@ -84,6 +84,7 @@ public class DevToolsPreferencePage extends FieldEditorPreferencePage implements
 		private void installMacUserKeyBindingOverrides() throws Exception {
 			SimpleBindingManager bindingsManager = new SimpleBindingManager("com.pfs.keybindings.luedersMacAcceleratorConfiguration");
 			bindingsManager.addUserBinding("COMMAND+W", "org.eclipse.ui.edit.copy", "org.eclipse.ui.contexts.dialogAndWindow");
+			bindingsManager.addUserBinding("COMMAND+3", "org.eclipse.ui.window.activateEditor", "org.eclipse.ui.contexts.window");
 			bindingsManager.addUserTextEditorBinding("COMMAND+L", "com.pfs.devtools.CenterEditorCommand");
 			bindingsManager.addUserTextEditorBinding("Ctrl+K", "org.eclipse.ui.file.close");
 			bindingsManager.addUserTextEditorBinding("Ctrl+V", "org.eclipse.ui.edit.text.goto.pageUp");
