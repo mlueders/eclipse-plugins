@@ -31,15 +31,17 @@ public class DevToolsPreferencePage extends FieldEditorPreferencePage implements
 		
 		private void resetDefaultPreferences() throws Exception {
 			setPreference("org.eclipse.core.resources", "description.autobuilding", false);
+			setPreference("org.eclipse.ui", "SHOW_TEXT_ON_PERSPECTIVE_BAR", false);
 			setPreference("org.eclipse.ui.editors", "lineNumberRuler", true);
+			setPreference("org.eclipse.ui.editors", "spellingEnabled", false);
 			setPreference("org.eclipse.ui.ide", "EXIT_PROMPT_ON_CLOSE_LAST_WINDOW", false);
 			setPreference("org.eclipse.ui.ide", "SAVE_ALL_BEFORE_BUILD", true);
 			setPreference("org.eclipse.jdt.ui", "smart_semicolon", true);
 			setPreference("org.eclipse.jdt.ui", "smart_opening_brace", true);
+			setPreference("org.eclipse.jdt.ui", "content_assist_guess_method_arguments", true);
 			setPreference("org.eclipse.debug.ui", "Console.lowWaterMark", 500000);
 			setPreference("org.eclipse.debug.ui", "Console.highWaterMark", 508000);
 			setPreference("org.eclipse.team.ui", "org.eclipse.team.ui.sychronizing_default_participant", "org.tigris.subversion.subclipse.participant");
-			
 			/*
 			String osName = System.getProperty("os.name");
 			if (osName.toLowerCase().contains("mac")) {
