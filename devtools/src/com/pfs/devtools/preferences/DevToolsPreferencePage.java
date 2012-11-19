@@ -87,7 +87,6 @@ public class DevToolsPreferencePage extends FieldEditorPreferencePage implements
 			bindingsManager.addUserTextEditorBinding("COMMAND+L", "com.pfs.devtools.CenterEditorCommand");
 			bindingsManager.addUserTextEditorBinding("Ctrl+K", "org.eclipse.ui.file.close");
 			bindingsManager.addUserTextEditorBinding("Ctrl+V", "org.eclipse.ui.edit.text.goto.pageUp");
-			//bindingsManager.makeSchemeActive();
 		}
 		
 	}

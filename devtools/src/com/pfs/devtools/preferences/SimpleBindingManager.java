@@ -6,7 +6,6 @@ import java.util.Map;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.jface.bindings.BindingManager;
-import org.eclipse.jface.bindings.Scheme;
 import org.eclipse.jface.bindings.keys.KeyBinding;
 import org.eclipse.jface.bindings.keys.KeySequence;
 import org.eclipse.ui.commands.ICommandService;
@@ -20,20 +19,18 @@ public class SimpleBindingManager {
 	private Map<?,?> EMPTY_PARAMETER_MAP = new HashMap<Object,Object>();
 	
 	private String schemeId;
-	private ICommandService commandService;
-	private IBindingService bindingService;
 	private BindingManager bindingManager;
+	private ICommandService commandService;
 	
 	public SimpleBindingManager(String schemeId) throws Exception {
 		this.schemeId = schemeId;
+		this.bindingManager = getBindingMangager();
 		this.commandService = (ICommandService) DevToolsPlugin.getDefault().getWorkbench().getService(ICommandService.class);
-		this.bindingService = (IBindingService) DevToolsPlugin.getDefault().getWorkbench().getService(IBindingService.class);
-		this.bindingManager = ((BindingService) bindingService).getBindingManager();
 	}
 	
-	public void makeSchemeActive() throws Exception {
-		Scheme scheme = bindingService.getScheme(schemeId);
-		bindingManager.setActiveScheme(scheme);
+	private BindingManager getBindingMangager() {
+		BindingService bindingService = (BindingService) DevToolsPlugin.getDefault().getWorkbench().getService(IBindingService.class);
+		return bindingService.getBindingManager();
 	}
 	
 	public void addUserTextEditorBinding(String keySequenceString, String commandId) throws Exception {
