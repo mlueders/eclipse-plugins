@@ -1,12 +1,16 @@
 package com.pfs.devtools.preferences;
 
+import java.lang.reflect.Field;
+
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jface.bindings.Scheme;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.StringButtonFieldEditor;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.eclipse.ui.keys.IBindingService;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 import com.pfs.devtools.DevToolsPlugin;
@@ -14,7 +18,7 @@ import com.pfs.devtools.DevToolsPlugin;
 public class DevToolsPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 	
 	private static final class InitWorkspaceDefaults extends StringButtonFieldEditor {
-
+		
 		public InitWorkspaceDefaults(Composite parent) {
 			super("com.pfs.applymydefaultprefs", "Apply My Default Prefs", parent);
 		}
@@ -42,14 +46,7 @@ public class DevToolsPreferencePage extends FieldEditorPreferencePage implements
 			setPreference("org.eclipse.debug.ui", "Console.lowWaterMark", 500000);
 			setPreference("org.eclipse.debug.ui", "Console.highWaterMark", 508000);
 			setPreference("org.eclipse.team.ui", "org.eclipse.team.ui.sychronizing_default_participant", "org.tigris.subversion.subclipse.participant");
-			/*
-			String osName = System.getProperty("os.name");
-			if (osName.toLowerCase().contains("mac")) {
-				setPreference("org.eclipse.ui", "KEY_CONFIGURATION_ID", "com.pfs.keybindings.luedersMacAcceleratorConfiguration");
-			} else {
-				setPreference("org.eclipse.ui", "KEY_CONFIGURATION_ID", "com.pfs.keybindings.luedersAcceleratorConfiguration");
-			}
-			*/
+			initializeMyKeyBindings();
 		}
 		
 		private void setPreference(String qualifier, String name, boolean value) throws Exception {
@@ -70,8 +67,30 @@ public class DevToolsPreferencePage extends FieldEditorPreferencePage implements
 	        ps.save();
 		}
 		
+		private void initializeMyKeyBindings() throws Exception {
+			String osName = System.getProperty("os.name");
+			if (osName.toLowerCase().contains("mac")) {
+				setPreference("org.eclipse.ui", "KEY_CONFIGURATION_ID", "com.pfs.keybindings.luedersMacAcceleratorConfiguration");
+				installMacUserKeyBindingOverrides();
+			} else {
+				setPreference("org.eclipse.ui", "KEY_CONFIGURATION_ID", "com.pfs.keybindings.luedersAcceleratorConfiguration");
+			}
+		}
+		
+		/**
+		 * For some unknown and highly annoying reason, some key bindings in lueders/plugin.xml are getting
+		 * completely ignored.    
+		 */
+		private void installMacUserKeyBindingOverrides() throws Exception {
+			SimpleBindingManager bindingsManager = new SimpleBindingManager("com.pfs.keybindings.luedersMacAcceleratorConfiguration");
+			bindingsManager.addUserBinding("COMMAND+W", "org.eclipse.ui.edit.copy", "org.eclipse.ui.contexts.dialogAndWindow");
+			bindingsManager.addUserTextEditorBinding("COMMAND+L", "com.pfs.devtools.CenterEditorCommand");
+			bindingsManager.addUserTextEditorBinding("Ctrl+K", "org.eclipse.ui.file.close");
+			//bindingsManager.makeSchemeActive();
+		}
+		
 	}
-
+	
 	public DevToolsPreferencePage() {
 		super(GRID);
 		setPreferenceStore(DevToolsPlugin.getDefault().getPreferenceStore());
