@@ -590,7 +590,7 @@
          contextId="org.eclipse.jdt.ui.javaEditorScope"
          commandId="org.eclipse.jdt.ui.correction.assignToLocal.assist"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Alt+Shift L"/>
+         sequence="Alt+Shift+L"/>
       <key
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.jdt.ui.edit.text.java.generate.constructor.using.fields"
@@ -695,12 +695,12 @@
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.ui.navigate.next"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Ctrl+N"/>
+         sequence="Ctrl+."/>
       <key
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.ui.navigate.previous"
          schemeId="com.pfs.keybindings.luedersAcceleratorConfiguration"
-         sequence="Ctrl+P"/>
+         sequence="Ctrl+,"/>
       <key
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
@@ -1621,12 +1621,12 @@
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.ui.navigate.next"
          schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
-         sequence="Ctrl+N"/>
+         sequence="Ctrl+."/>
       <key
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.ui.navigate.previous"
          schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
-         sequence="Ctrl+P"/>
+         sequence="Ctrl+,"/>
       <key
          contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
