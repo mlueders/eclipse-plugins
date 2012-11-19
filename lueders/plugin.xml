@@ -46,19 +46,19 @@
             description="System.out">
          <pattern>System.out.println(${cursor});</pattern>
       </template>
+      <template
+            id="com.pfs.logger"
+            contextTypeId="java"
+            name="logger"
+            description="Create logger for type">
+         <pattern>private static final Logger logger = LoggerFactory.getLogger(${enclosing_type}.class);</pattern>
+      </template>
    </extension>
 
    
    <!-- NOTE: not sure why, but some bindings *must* be defined within the org.eclipse.ui.contexts.window context 
         or they don't work, no idea why.  So, if a binding isn't working when defined with the appropriate scope, 
         try expanding the scope. 
-        
-        Investigate: some key bindings I can't seem to get to work, no matter what... see about programmatically installing
-        bindings
-        google: bindingservice eclipse
-        google: eclipse org.eclipse.ui.bindings bindings not picked up
-        https://bugs.eclipse.org/bugs/show_bug.cgi?id=353628
-        the above error gives examples for progammatic adding bindings
     -->
    <extension
          point="org.eclipse.ui.bindings">
