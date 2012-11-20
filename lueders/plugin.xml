@@ -1503,7 +1503,7 @@
       <!-- *********** -->
          
       <key
-         contextId="org.eclipse.jdt.ui.javaEditorScope"
+         contextId="org.eclipse.ui.contexts.window"
          commandId="org.eclipse.jdt.ui.edit.text.java.rename.element"
          schemeId="com.pfs.keybindings.luedersMacAcceleratorConfiguration"
          sequence="COMMAND+Shift+R"/>
