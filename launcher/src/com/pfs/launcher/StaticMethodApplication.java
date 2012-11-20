@@ -16,7 +16,7 @@ public class StaticMethodApplication {
 		String className = args[0];
 		String methodName = args[1];
 
-		Class type = Class.forName(className);
+		Class<?> type = Class.forName(className);
 		Method method = type.getMethod(methodName);
 
 		method.invoke(null);

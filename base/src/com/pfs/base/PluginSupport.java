@@ -34,7 +34,7 @@ public class PluginSupport {
 	}
 
 	public static Object invokeInaccessibleMethod(Object target, String methodName, Object[] args) throws Exception {
-		Class[] paramTypes;
+		Class<?>[] paramTypes;
 
 		if (args != null) {
 			paramTypes = new Class[args.length];
@@ -48,9 +48,9 @@ public class PluginSupport {
 		return invokeInaccessibleMethod(target, methodName, args, paramTypes);
 	}
 
-	public static Object invokeInaccessibleMethod(Object target, String methodName, Object[] args, Class[] paramTypes)
+	public static Object invokeInaccessibleMethod(Object target, String methodName, Object[] args, Class<?>[] paramTypes)
 			throws Exception {
-		Class targetClass = target.getClass();
+		Class<?> targetClass = target.getClass();
 		Method targetMethod = null;
 
 		while (targetClass != Object.class) {
@@ -71,7 +71,7 @@ public class PluginSupport {
 	}
 
 	public static Object getInaccessibleValue(Object target, String name) throws Exception {
-		Class targetClass = target.getClass();
+		Class<?> targetClass = target.getClass();
 		Field targetField = null;
 
 		while (targetClass != Object.class) {
@@ -91,7 +91,7 @@ public class PluginSupport {
 		return targetField.get(target);
 	}
 
-	public static Object[] toArray(Iterator elements) {
+	public static Object[] toArray(Iterator<?> elements) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		while (elements.hasNext()) {
 			list.add(elements.next());
@@ -99,7 +99,7 @@ public class PluginSupport {
 		return list.toArray();
 	}
 
-	public static Object[] toArray(Iterator elements, Class type) {
+	public static Object[] toArray(Iterator<?> elements, Class<?> type) {
 		ArrayList<Object> list = new ArrayList<Object>();
 		while (elements.hasNext()) {
 			list.add(elements.next());
@@ -109,11 +109,11 @@ public class PluginSupport {
 		return array;
 	}
 
-	public static String toString(Iterator elements, String methodName) {
+	public static String toString(Iterator<?> elements, String methodName) {
 		return toString(toArray(elements), methodName);
 	}
 
-	public static String toString(Iterator elements, String[] methodName) {
+	public static String toString(Iterator<?> elements, String[] methodName) {
 		return toString(toArray(elements), methodName);
 	}
 

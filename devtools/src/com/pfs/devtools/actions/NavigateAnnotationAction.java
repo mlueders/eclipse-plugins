@@ -34,7 +34,7 @@ public abstract class NavigateAnnotationAction extends DevToolsAction {
 		}
 	};
 
-	protected abstract Position getPositionToNavigate(List positions, int currentIndex);
+	protected abstract Position getPositionToNavigate(List<Position> positions, int currentIndex);
 
 	private String annotationType;
 
@@ -44,7 +44,7 @@ public abstract class NavigateAnnotationAction extends DevToolsAction {
 
 	private List<Position> getAnnotationPositions(String annotationType, IAnnotationModel model) {
 		ArrayList<Position> positions = new ArrayList<Position>();
-		for (Iterator i = model.getAnnotationIterator(); i.hasNext();) {
+		for (Iterator<?> i = model.getAnnotationIterator(); i.hasNext();) {
 			Object item = i.next();
 
 			if (item instanceof Annotation) {
@@ -78,7 +78,7 @@ public abstract class NavigateAnnotationAction extends DevToolsAction {
 		}
 	}
 
-	private void onNavigate(ITextEditor editor, ITextSelection selection, List positions) {
+	private void onNavigate(ITextEditor editor, ITextSelection selection, List<Position> positions) {
 		ITextSelection tSelection = (ITextSelection) selection;
 		int rangeOffset = tSelection.getOffset();
 		int rangeLength = 1;
@@ -98,7 +98,7 @@ public abstract class NavigateAnnotationAction extends DevToolsAction {
 		}
 	}
 
-	private void onNavigate(ITextEditor editor, List positions, int currentIndex) {
+	private void onNavigate(ITextEditor editor, List<Position> positions, int currentIndex) {
 		Position toNavigate = getPositionToNavigate(positions, currentIndex);
 
 		if (toNavigate != null) {

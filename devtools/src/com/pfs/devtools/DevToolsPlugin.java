@@ -1,12 +1,10 @@
 package com.pfs.devtools;
 
-import com.pfs.base.BasePlugin;
-
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.ui.IStartup;
+
+import com.pfs.base.BasePlugin;
 
 /**
  * The main plugin class to be used in the desktop.

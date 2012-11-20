@@ -14,19 +14,19 @@ public abstract class NavigateMarkOccurrence extends NavigateAnnotationAction {
 
 	public static class NextMarkOccurrence extends NavigateMarkOccurrence {
 
-		protected Position getPositionToNavigate(List positions, int index) {
+		protected Position getPositionToNavigate(List<Position> positions, int index) {
 			index++;
 
-			return index >= positions.size() ? null : (Position) positions.get(index);
+			return index >= positions.size() ? null : positions.get(index);
 		}
 	}
 
 	public static class PreviousMarkOccurrence extends NavigateMarkOccurrence {
 
-		protected Position getPositionToNavigate(List positions, int index) {
+		protected Position getPositionToNavigate(List<Position> positions, int index) {
 			index--;
 
-			return index < 0 ? null : (Position) positions.get(index);
+			return index < 0 ? null : positions.get(index);
 		}
 	}
 

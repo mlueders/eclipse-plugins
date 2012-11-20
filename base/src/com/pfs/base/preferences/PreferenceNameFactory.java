@@ -7,7 +7,7 @@ package com.pfs.base.preferences;
 public class PreferenceNameFactory {
 	private String prefix;
 
-	public PreferenceNameFactory(Class type) {
+	public PreferenceNameFactory(Class<?> type) {
 		prefix = type.getName();
 	}
 

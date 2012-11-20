@@ -75,9 +75,9 @@ public class AntLauncher extends AbstractLauncher {
 		}
 
 		private ILaunchConfiguration getLaunchConfiguration(IFile file, String targetName, String launcherName) {
-			List configurations = findExistingLaunchConfigurations(file);
+			List<?> configurations = findExistingLaunchConfigurations(file);
 
-			for (Iterator i = configurations.iterator(); i.hasNext();) {
+			for (Iterator<?> i = configurations.iterator(); i.hasNext();) {
 				ILaunchConfiguration configuration = (ILaunchConfiguration) i.next();
 
 				if (launcherName.equals(configuration.getName())) {
