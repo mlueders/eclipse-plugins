@@ -1,36 +1,33 @@
 package com.pfs.devtools.preferences;
 
-import java.lang.reflect.Field;
-
 import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.jface.bindings.Scheme;
+import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
-import org.eclipse.jface.preference.StringButtonFieldEditor;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.eclipse.ui.keys.IBindingService;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 import com.pfs.devtools.DevToolsPlugin;
 
 public class DevToolsPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 	
-	private static final class InitWorkspaceDefaults extends StringButtonFieldEditor {
+	private static final class InitWorkspaceDefaults extends BooleanFieldEditor {
 		
 		public InitWorkspaceDefaults(Composite parent) {
-			super("com.pfs.applymydefaultprefs", "Apply My Default Prefs", parent);
+			super("com.pfs.applymydefaultprefs", "Apply Lueders Default Prefs", parent);
 		}
 
 		@Override
-		protected String changePressed() {
+		protected void valueChanged(boolean oldValue, boolean newValue) {
 			try {
-				resetDefaultPreferences();
+				if (newValue) {
+					resetDefaultPreferences();
+				}
 			} catch (Exception ex) {
 				throw new RuntimeException(ex);
 			}
-			return null;
 		}
 		
 		private void resetDefaultPreferences() throws Exception {
