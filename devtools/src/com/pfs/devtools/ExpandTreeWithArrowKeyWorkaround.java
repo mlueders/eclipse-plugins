@@ -42,7 +42,6 @@ public class ExpandTreeWithArrowKeyWorkaround {
 	private class KeyListener extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent keyEvent) {
-			// TODO: figure out where right arrow key is defined for eclipse key code
 			if (keyEvent.keyCode == SWT.ARROW_RIGHT) {
 				onExpandEvent();
 			}
