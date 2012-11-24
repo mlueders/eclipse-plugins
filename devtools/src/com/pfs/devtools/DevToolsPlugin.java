@@ -3,6 +3,7 @@ package com.pfs.devtools;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.ui.IStartup;
+import org.eclipse.ui.IWindowListener;
 
 import com.pfs.base.BasePlugin;
 
@@ -20,6 +21,11 @@ public class DevToolsPlugin extends BasePlugin implements IStartup {
 	public static DevToolsPlugin getDefault() {
 		return plugin;
 	}
+	
+	public static boolean isMacOs() {
+		String osName = System.getProperty("os.name");
+		return osName.toLowerCase().contains("mac");
+	}
 
 	public DevToolsPlugin() {
 		super();
@@ -34,12 +40,17 @@ public class DevToolsPlugin extends BasePlugin implements IStartup {
 	public void earlyStartup() {
 		DevToolsLaunchConfigurationListener launchConfigListener = new DevToolsLaunchConfigurationListener();
 		DebugPlugin.getDefault().getLaunchManager().addLaunchConfigurationListener(launchConfigListener);
-
+		
 		DevToolsProjectAddedListener resourceListener = new DevToolsProjectAddedListener();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceListener);
 		
 		DerivedDirectoryMarkerFolderAddedListener derivedDirectoryMarkerListener = new DerivedDirectoryMarkerFolderAddedListener();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(derivedDirectoryMarkerListener);
+		
+		if (DevToolsPlugin.isMacOs()) {
+			IWindowListener windowListener = new ExpandTreeWithArrowKeyWorkaround.WindowListener();
+			DevToolsPlugin.getDefault().getWorkbench().addWindowListener(windowListener);
+		}
 	}
 
 	@Override

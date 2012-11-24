@@ -1,6 +1,9 @@
 package com.pfs.devtools.preferences;
 
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.StringFieldEditor;
@@ -69,8 +72,7 @@ public class DevToolsPreferencePage extends FieldEditorPreferencePage implements
 		}
 		
 		private void initializeMyKeyBindings() throws Exception {
-			String osName = System.getProperty("os.name");
-			if (osName.toLowerCase().contains("mac")) {
+			if (DevToolsPlugin.isMacOs()) {
 				setPreference("org.eclipse.ui", "KEY_CONFIGURATION_ID", "com.pfs.keybindings.luedersMacAcceleratorConfiguration");
 				installMacUserKeyBindingOverrides();
 			} else {
